@@ -1,4 +1,6 @@
-export const restaurants = [
+import { IRestaraunt } from "../Components/Models";
+
+export const restaurants: IRestaraunt[] = [
     {
         id: "a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2",
         name: "Dishoom",
