@@ -1,5 +1,5 @@
 import { IRestaraunt } from "./Components/Models";
-import { RestarauntCart } from "./Components/RestarauntCart/RestarauntCart";
+import { Restaraunt } from "./Components/Restaraunt/Restaraunt";
 import { RestarauntList } from "./Components/RestarauntList/RestarauntList";
 
 export function App({ restaurants }: { restaurants: IRestaraunt[] }) {
@@ -7,7 +7,7 @@ export function App({ restaurants }: { restaurants: IRestaraunt[] }) {
         <>
             <RestarauntList restaurants={restaurants} />
             {restaurants.map((restaraunt) => (
-                <RestarauntCart restaraunt={restaraunt} />
+                <Restaraunt restaraunt={restaraunt} />
             ))}
         </>
     );

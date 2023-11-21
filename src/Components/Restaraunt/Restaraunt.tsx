@@ -2,8 +2,8 @@ import { Menu } from "../Menu/Menu";
 import { IRestaraunt } from "../Models";
 import { Reviews } from "../ReviewsBlock/Reviews";
 
-export function RestarauntCart(props: { restaraunt: IRestaraunt }) {
-    const { name, menu, reviews } = props.restaraunt;
+export function Restaraunt({ restaraunt }: { restaraunt: IRestaraunt }) {
+    const { name, menu, reviews } = restaraunt;
     return (
         <>
             <h1>{name}</h1>
