@@ -1,9 +1,21 @@
 import { IRestaraunt } from "../Models";
-export function RestarauntList(props: { restaurants: IRestaraunt[] }) {
+export function RestarauntList({
+    restaurants,
+    setCurrentRestarauntName,
+}: {
+    restaurants: IRestaraunt[];
+    setCurrentRestarauntName: Function;
+}) {
     return (
         <div>
-            {props.restaurants.map((restaraunt) => (
-                <button>{restaraunt.name}</button>
+            {restaurants.map((restaraunt) => (
+                <button
+                    onClick={() => {
+                        setCurrentRestarauntName(restaraunt.name);
+                    }}
+                >
+                    {restaraunt.name}
+                </button>
             ))}
         </div>
     );
