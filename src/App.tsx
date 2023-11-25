@@ -9,6 +9,7 @@ export function App({ restaurants }: { restaurants: IRestaraunt[] }) {
     const currentRestoran = restaurants.find(
         (restaraunt) => restaraunt.name === currentRestarauntName
     );
+
     return (
         <>
             <RestarauntList
