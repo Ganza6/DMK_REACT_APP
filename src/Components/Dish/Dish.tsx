@@ -10,12 +10,10 @@ export function Dish({ dish }: { dish: IDish }) {
             {name} {price}
             <br />
             <Counter
-                props={{
-                    min: MIN_RATE_VALUE,
-                    max: MAX_RATE_VALUE,
-                    getNewValue: (val: number) => {
-                        // do something with new number of dish
-                    },
+                min={MIN_RATE_VALUE}
+                max={MAX_RATE_VALUE}
+                getNewCounterValue={(val: number) => {
+                    // do something with new number of dish
                 }}
             />
         </h3>

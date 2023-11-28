@@ -1,32 +1,40 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function Counter({
-    props: { min, max, step = 1, initialValue = 0, getNewValue },
+    min,
+    max,
+    step = 1,
+    initialValue = 0,
+    getNewCounterValue,
 }: {
-    props: {
-        min: number;
-        max: number;
-        getNewValue: Function;
-        step?: number;
-        initialValue?: number;
-    };
+    min: number;
+    max: number;
+    getNewCounterValue: Function;
+    step?: number;
+    initialValue?: number;
 }) {
     const [counterValue, setCounterValue] = useState(initialValue);
-    useEffect(() => {
-        getNewValue(counterValue);
-    }, [counterValue]);
+
     return (
         <div>
             <button
                 disabled={counterValue <= min}
-                onClick={() => setCounterValue(counterValue - step)}
+                onClick={() => {
+                    const newCounterValue = counterValue - step;
+                    getNewCounterValue(newCounterValue);
+                    setCounterValue(newCounterValue);
+                }}
             >
                 -
             </button>
             <span>{counterValue}</span>
             <button
                 disabled={counterValue >= max}
-                onClick={() => setCounterValue(counterValue + step)}
+                onClick={() => {
+                    const newCounterValue = counterValue + step;
+                    getNewCounterValue(newCounterValue);
+                    setCounterValue(newCounterValue);
+                }}
             >
                 +
             </button>
