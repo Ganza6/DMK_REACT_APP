@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import { Counter } from "../Counter/Counter";
 import { IReview } from "../Models";
 import { MAX_RATE_VALUE, MIN_RATE_VALUE } from "../constants/rateConstants";
+import styles from "./styles.module.css";
 
 const DEFAULT_FORM_VALUE: IReview = { text: "", user: "", rating: 0, id: "1" };
 const STEP_RATE: number = 0.5;
@@ -33,9 +34,10 @@ export function NewReviewForm() {
     console.log(state);
 
     return (
-        <div>
-            <h2>Новый отзыв</h2>
+        <div className={styles.review_form}>
+            <h2>Your review</h2>
             <input
+                className={styles.review_form_element}
                 placeholder="Имя"
                 onBlur={(e) =>
                     dispatch({
@@ -44,10 +46,9 @@ export function NewReviewForm() {
                     })
                 }
             />
-            <br />
             <textarea
+                className={styles.review_form_element}
                 placeholder="Введите ваш отзыв"
-                style={{ width: "300px", height: "100px" }}
                 onBlur={(e) =>
                     dispatch({
                         payload: e.target.value,
@@ -55,8 +56,8 @@ export function NewReviewForm() {
                     })
                 }
             ></textarea>
-            <br />
             <Counter
+                className={styles.review_form_element}
                 min={MIN_RATE_VALUE}
                 max={MAX_RATE_VALUE}
                 step={STEP_RATE}

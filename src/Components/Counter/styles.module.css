@@ -1,0 +1,24 @@
+button.plus:hover{
+    border: 2px solid green;
+}
+
+button.minus:hover{
+    border: 2px solid red;
+}
+
+button.counter_elem{
+    background-color: white;
+    border:2px solid black;
+    width: 40px;
+    height: 20px;
+}
+button:disabled{
+    border:2px solid #ccc;
+}
+.counter_elem{
+    margin-right: 10px;
+}
+
+span.counter_elem{
+    font-size: 25px;
+}

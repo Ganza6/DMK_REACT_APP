@@ -1,0 +1,23 @@
+.review_form_element{
+    margin-top: 10px;
+}
+
+.review_form{
+    display: flex;
+    flex-direction: column;
+}
+
+input.review_form_element{
+    width: 400px;
+}
+
+textarea.review_form_element{
+    width: 400px;
+    height: 150px;
+    resize: none;
+}
+
+.review_form > h2{
+    border-bottom: 1px solid red;
+    width: 20%;
+}

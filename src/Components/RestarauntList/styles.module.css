@@ -1,0 +1,15 @@
+.restaraunts_div{
+    display: flex;
+    justify-content:space-between;
+}
+
+.restaraunt_btn{
+    font-size: 25px;
+    background-color: white;
+    width: 150px;
+    border: none;
+}
+
+.restaraunt_btn:hover{
+    font-weight: bold;
+}

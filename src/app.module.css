@@ -1,0 +1,17 @@
+.app {
+    min-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid #ccc!important;
+    border-right: 1px solid #ccc!important;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 20px;
+    
+}
+
+.app_wrap{
+    display: flex;
+    justify-content: center;
+}
