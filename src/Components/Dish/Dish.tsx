@@ -1,8 +1,10 @@
 import { IDish } from "../Models";
 import { Counter } from "../Counter/Counter";
-import { MAX_RATE_VALUE, MIN_RATE_VALUE } from "../constants/rateConstants";
+import { useState } from "react";
+import { DISH_COUNTER_STEP, MAX_DISH, MIN_DISH } from "./constants";
 
 export function Dish({ dish }: { dish: IDish }) {
+    const [numberOfDish, setNumberOfDish] = useState(0);
     const { name, price } = dish;
 
     return (
@@ -10,11 +12,15 @@ export function Dish({ dish }: { dish: IDish }) {
             {name} {price}
             <br />
             <Counter
-                min={MIN_RATE_VALUE}
-                max={MAX_RATE_VALUE}
-                getNewCounterValue={(val: number) => {
-                    // do something with new number of dish
-                }}
+                min={MIN_DISH}
+                max={MAX_DISH}
+                value={numberOfDish}
+                increment={() =>
+                    setNumberOfDish(numberOfDish + DISH_COUNTER_STEP)
+                }
+                decrement={() =>
+                    setNumberOfDish(numberOfDish - DISH_COUNTER_STEP)
+                }
             />
         </h3>
     );

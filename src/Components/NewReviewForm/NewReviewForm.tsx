@@ -1,10 +1,12 @@
 import { useReducer } from "react";
 import { Counter } from "../Counter/Counter";
 import { IReview } from "../Models";
-import { MAX_RATE_VALUE, MIN_RATE_VALUE } from "../constants/rateConstants";
-
-const DEFAULT_FORM_VALUE: IReview = { text: "", user: "", rating: 0, id: "1" };
-const STEP_RATE: number = 0.5;
+import {
+    MIN_RATE_VALUE,
+    MAX_RATE_VALUE,
+    DEFAULT_FORM_VALUE,
+    STEP_RATE,
+} from "./constants";
 
 enum actionType {
     "ChangeName",
@@ -59,14 +61,19 @@ export function NewReviewForm() {
             <Counter
                 min={MIN_RATE_VALUE}
                 max={MAX_RATE_VALUE}
-                step={STEP_RATE}
-                getNewCounterValue={(rate: number) =>
+                value={state.rating}
+                decrement={() =>
                     dispatch({
-                        payload: rate,
                         type: actionType.ChangeRate,
+                        payload: state.rating - STEP_RATE,
                     })
                 }
-                initialValue={DEFAULT_FORM_VALUE.rating}
+                increment={() =>
+                    dispatch({
+                        type: actionType.ChangeRate,
+                        payload: state.rating + STEP_RATE,
+                    })
+                }
             />
         </div>
     );
