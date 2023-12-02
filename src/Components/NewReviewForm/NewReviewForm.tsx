@@ -1,13 +1,9 @@
 import { useReducer } from "react";
 import { Counter } from "../Counter/Counter";
 import { IReview } from "../Models";
-import {
-    MIN_RATE_VALUE,
-    MAX_RATE_VALUE,
-    DEFAULT_FORM_VALUE,
-    STEP_RATE,
-} from "./constants";
+import { DEFAULT_FORM_VALUE, STEP_RATE } from "./constants";
 import styles from "./styles.module.css";
+import { MIN_RATE, MAX_RATE } from "../constants/reviewRateConstants";
 
 enum actionType {
     "ChangeName",
@@ -60,8 +56,8 @@ export function NewReviewForm() {
             ></textarea>
             <Counter
                 className={styles.review_form_element}
-                min={MIN_RATE_VALUE}
-                max={MAX_RATE_VALUE}
+                min={MIN_RATE}
+                max={MAX_RATE}
                 value={state.rating}
                 decrement={() =>
                     dispatch({
