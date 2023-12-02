@@ -1,4 +1,6 @@
 import { MouseEventHandler } from "react";
+import styles from "./styles.module.css";
+const { minus, plus, counter_elem } = styles;
 
 export function Counter({
     min,
@@ -6,23 +8,27 @@ export function Counter({
     value,
     increment,
     decrement,
+    className,
 }: {
     min: number;
     max: number;
     value: number;
     increment: Function;
     decrement: Function;
+    className?: string;
 }) {
     return (
-        <div>
+        <div className={className ? className : ""}>
             <button
+                className={minus + " " + counter_elem}
                 disabled={value <= min}
                 onClick={decrement as MouseEventHandler<HTMLButtonElement>}
             >
                 -
             </button>
-            <span>{value}</span>
+            <span className={counter_elem}>{value}</span>
             <button
+                className={plus + " " + counter_elem}
                 disabled={value >= max}
                 onClick={increment as MouseEventHandler<HTMLButtonElement>}
             >

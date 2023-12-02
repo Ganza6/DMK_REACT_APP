@@ -9,7 +9,7 @@ export function Restaraunt({
     restaraunt: IRestaraunt | undefined;
 }) {
     if (restaraunt == undefined) {
-        return "Пока ничего не выбрано";
+        return "Такого ресторана не найдено";
     }
     const { name, menu, reviews } = restaraunt;
     return (

@@ -1,4 +1,6 @@
 import { IRestaraunt } from "../Models";
+import styles from "./styles.module.css";
+const { restaraunts_div, restaraunt_btn } = styles;
 export function RestarauntList({
     restaurants,
     setCurrentRestarauntName,
@@ -7,9 +9,10 @@ export function RestarauntList({
     setCurrentRestarauntName: Function;
 }) {
     return (
-        <div>
+        <div className={restaraunts_div}>
             {restaurants.map((restaraunt) => (
                 <button
+                    className={restaraunt_btn}
                     onClick={() => {
                         setCurrentRestarauntName(restaraunt.name);
                     }}

@@ -1,12 +1,9 @@
 import { useReducer } from "react";
 import { Counter } from "../Counter/Counter";
 import { IReview } from "../Models";
-import {
-    MIN_RATE_VALUE,
-    MAX_RATE_VALUE,
-    DEFAULT_FORM_VALUE,
-    STEP_RATE,
-} from "./constants";
+import { DEFAULT_FORM_VALUE, STEP_RATE } from "./constants";
+import styles from "./styles.module.css";
+import { MIN_RATE, MAX_RATE } from "../constants/reviewRateConstants";
 
 enum actionType {
     "ChangeName",
@@ -35,9 +32,10 @@ export function NewReviewForm() {
     console.log(state);
 
     return (
-        <div>
-            <h2>Новый отзыв</h2>
+        <div className={styles.review_form}>
+            <h2>Your review</h2>
             <input
+                className={styles.review_form_element}
                 placeholder="Имя"
                 onBlur={(e) =>
                     dispatch({
@@ -46,10 +44,9 @@ export function NewReviewForm() {
                     })
                 }
             />
-            <br />
             <textarea
+                className={styles.review_form_element}
                 placeholder="Введите ваш отзыв"
-                style={{ width: "300px", height: "100px" }}
                 onBlur={(e) =>
                     dispatch({
                         payload: e.target.value,
@@ -57,10 +54,10 @@ export function NewReviewForm() {
                     })
                 }
             ></textarea>
-            <br />
             <Counter
-                min={MIN_RATE_VALUE}
-                max={MAX_RATE_VALUE}
+                className={styles.review_form_element}
+                min={MIN_RATE}
+                max={MAX_RATE}
                 value={state.rating}
                 decrement={() =>
                     dispatch({
