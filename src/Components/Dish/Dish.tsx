@@ -1,31 +1,27 @@
-import { useState } from "react";
 import { IDish } from "../Models";
+import { Counter } from "../Counter/Counter";
+import { useState } from "react";
+import { DISH_COUNTER_STEP, MAX_DISH, MIN_DISH } from "./constants";
 
 export function Dish({ dish }: { dish: IDish }) {
-    const [dishNumber, setDishNumber] = useState(0);
+    const [numberOfDish, setNumberOfDish] = useState(0);
+    const { name, price } = dish;
 
-    function increaseDishNumber() {
-        if (dishNumber == 5) {
-            return;
-        } else {
-            setDishNumber(dishNumber + 1);
-        }
-    }
-
-    function decreaseDishNumber() {
-        if (dishNumber == 0) {
-            return;
-        } else {
-            setDishNumber(dishNumber - 1);
-        }
-    }
     return (
         <h3>
-            {dish.name} {dish.price}
+            {name} {price}
             <br />
-            <button onClick={() => decreaseDishNumber()}>-</button>
-            {dishNumber}
-            <button onClick={() => increaseDishNumber()}>+</button>
+            <Counter
+                min={MIN_DISH}
+                max={MAX_DISH}
+                value={numberOfDish}
+                increment={() =>
+                    setNumberOfDish(numberOfDish + DISH_COUNTER_STEP)
+                }
+                decrement={() =>
+                    setNumberOfDish(numberOfDish - DISH_COUNTER_STEP)
+                }
+            />
         </h3>
     );
 }

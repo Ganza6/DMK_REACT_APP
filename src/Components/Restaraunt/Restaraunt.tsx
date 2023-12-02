@@ -1,5 +1,6 @@
 import { Menu } from "../Menu/Menu";
 import { IRestaraunt } from "../Models";
+import { NewReviewForm } from "../NewReviewForm/NewReviewForm";
 import { Reviews } from "../ReviewsBlock/Reviews";
 
 export function Restaraunt({
@@ -16,7 +17,7 @@ export function Restaraunt({
             <h1>{name}</h1>
             <Menu menu={menu} />
             <Reviews reviews={reviews} />
-            <br />
+            <NewReviewForm />
         </>
     );
 }
