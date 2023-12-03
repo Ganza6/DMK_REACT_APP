@@ -1,5 +1,5 @@
 import { IReview } from "../Models";
-import { MAX_RATE } from "../constants/reviewRateConstants";
+import { MAX_RATE } from "../../constants/reviewRateConstants";
 
 export function Review({ review }: { review: IReview }) {
     return (
