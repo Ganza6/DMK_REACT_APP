@@ -1,25 +1,19 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { Layout } from "../../Components/Layout/component";
-import { IRestaraunt } from "../../Components/Models";
 import { RestarauntList } from "../../Components/RestarauntList/RestarauntList";
 import { Restaraunt } from "../../Components/Restaraunt/Restaraunt";
+import { selectRandRestarauntId } from "../../Redux/features/entities/restaraunt/selectors";
+import { useSelector } from "react-redux";
 
 const { app_wrap, app } = styles;
 
-export function RestarauntPage({
-    restaurants,
-}: {
-    restaurants: IRestaraunt[];
-}) {
+export function RestarauntPage({}: {}) {
     console.log("Render", "RestarauntPage");
-    const [currentRestarauntName, setCurrentRestarauntName] = useState(
-        restaurants[0].name
+    const [currentRestarauntId, setCurrentRestarauntId] = useState(
+        useSelector(selectRandRestarauntId)
     );
 
-    const currentRestoran = restaurants.find(
-        (restaraunt) => restaraunt.name === currentRestarauntName
-    );
     return (
         <Layout
             children={
@@ -27,12 +21,9 @@ export function RestarauntPage({
                     <div className={app_wrap}>
                         <div className={app}>
                             <RestarauntList
-                                restaurants={restaurants}
-                                setCurrentRestarauntName={
-                                    setCurrentRestarauntName
-                                }
+                                setCurrentRestarauntId={setCurrentRestarauntId}
                             />
-                            <Restaraunt restaraunt={currentRestoran} />
+                            <Restaraunt restarauntId={currentRestarauntId} />
                         </div>
                     </div>
                 </div>

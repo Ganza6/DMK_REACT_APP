@@ -1,35 +1,21 @@
-import { ModeContext } from "../../Contexts/modeContext/context";
-import { appMode } from "../../Constants/appMode";
-import { IRestaraunt } from "../Models";
 import styles from "./styles.module.css";
-import { useContext } from "react";
-const { restaraunts_div, restaraunt_btn } = styles;
+import { useSelector } from "react-redux";
+import { selectRestarauntIds } from "../../Redux/features/entities/restaraunt/selectors";
+import { RestarauntNameButton } from "../RestarauntNameButton/components";
 export function RestarauntList({
-    restaurants,
-    setCurrentRestarauntName,
+    setCurrentRestarauntId,
 }: {
-    restaurants: IRestaraunt[];
-    setCurrentRestarauntName: Function;
+    setCurrentRestarauntId: Function;
 }) {
-    const contextPayload = useContext(ModeContext);
+    const restarauntIds = useSelector(selectRestarauntIds);
     console.log("Render", "RestarauntList");
-    console.info(contextPayload);
     return (
-        <div className={restaraunts_div}>
-            {restaurants.map((restaraunt) => (
-                <button
-                    className={
-                        restaraunt_btn +
-                        (contextPayload.currentMode === appMode.turbo
-                            ? " " + styles.mode_advanced
-                            : "")
-                    }
-                    onClick={() => {
-                        setCurrentRestarauntName(restaraunt.name);
-                    }}
-                >
-                    {restaraunt.name}
-                </button>
+        <div className={styles.restaraunts_div}>
+            {restarauntIds.map((restarauntId: string) => (
+                <RestarauntNameButton
+                    restarauntId={restarauntId}
+                    onClickFunc={(id: string) => setCurrentRestarauntId(id)}
+                />
             ))}
         </div>
     );

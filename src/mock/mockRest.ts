@@ -1,4 +1,4 @@
-import { IRestaraunt } from "../Components/Models";
+import { IRestaraunt } from "../Models/Models";
 
 export const restaurants: IRestaraunt[] = [
     {
