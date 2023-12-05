@@ -1,5 +1,5 @@
-import { ModeContext } from "../../Pages/RestarauntsPage/context";
-import { appMode } from "../../constants/appMode";
+import { ModeContext } from "../../Contexts/modeContext/context";
+import { appMode } from "../../Constants/appMode";
 import { IRestaraunt } from "../Models";
 import styles from "./styles.module.css";
 import { useContext } from "react";
@@ -12,6 +12,7 @@ export function RestarauntList({
     setCurrentRestarauntName: Function;
 }) {
     const contextPayload = useContext(ModeContext);
+    console.log("Render", "RestarauntList");
     console.info(contextPayload);
     return (
         <div className={restaraunts_div}>

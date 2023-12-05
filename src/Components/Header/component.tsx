@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 import { useContext } from "react";
-import { ModeContext } from "../../Pages/RestarauntsPage/context";
+import { ModeContext } from "../../Contexts/modeContext/context";
 export function Header() {
     const contextPayload = useContext(ModeContext);
     return (

@@ -3,7 +3,7 @@ import { Counter } from "../Counter/Counter";
 import { IReview } from "../Models";
 import { DEFAULT_FORM_VALUE, STEP_RATE } from "./constants";
 import styles from "./styles.module.css";
-import { MIN_RATE, MAX_RATE } from "../../constants/reviewRateConstants";
+import { MIN_RATE, MAX_RATE } from "../../Constants/reviewRateConstants";
 
 enum actionType {
     "ChangeName",
