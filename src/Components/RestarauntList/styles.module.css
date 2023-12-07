@@ -13,3 +13,7 @@
 .restaraunt_btn:hover{
     font-weight: bold;
 }
+
+.mode_advanced{
+    color: red;
+}

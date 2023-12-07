@@ -3,7 +3,7 @@ import { Counter } from "../Counter/Counter";
 import { IReview } from "../Models";
 import { DEFAULT_FORM_VALUE, STEP_RATE } from "./constants";
 import styles from "./styles.module.css";
-import { MIN_RATE, MAX_RATE } from "../constants/reviewRateConstants";
+import { MIN_RATE, MAX_RATE } from "../../Constants/reviewRateConstants";
 
 enum actionType {
     "ChangeName",
@@ -29,7 +29,7 @@ function reducer(state: IReview, action: IAction): IReview {
 
 export function NewReviewForm() {
     const [state, dispatch] = useReducer(reducer, DEFAULT_FORM_VALUE);
-    console.log(state);
+    console.info("Render", "NewReviewForm");
 
     return (
         <div className={styles.review_form}>

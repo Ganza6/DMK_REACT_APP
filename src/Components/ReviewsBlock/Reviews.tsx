@@ -1,7 +1,8 @@
 import { IReview } from "../Models";
 import { Review } from "../Review/Review";
 
-export function Reviews({ reviews }: { reviews: IReview[] }) {
+export function ReviewsBlock({ reviews }: { reviews: IReview[] }) {
+    console.info("Render", "ReviewsBlock");
     return (
         <>
             <h2>Reviews</h2>
