@@ -11,7 +11,13 @@ export const getRestaraunts = createAsyncThunk(
     },
     {
         condition: (_, { getState }) => {
-            return true; //!selectRestarauntsRequestStatus(getState() as State); // запрашиваем пользователей, только если
+            const currentResrarauntSliceStatus = selectRestarauntsRequestStatus(
+                getState() as State
+            );
+            return (
+                currentResrarauntSliceStatus === requestStatus.EMPTY ||
+                currentResrarauntSliceStatus === requestStatus.ERROR
+            ); // запрашиваем ресторан, только если случилась ошибка или слайс пустой
         },
     }
 );

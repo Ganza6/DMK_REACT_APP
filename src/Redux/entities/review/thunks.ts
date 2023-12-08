@@ -19,13 +19,7 @@ export const getRestarauntReviews = createAsyncThunk(
                 restarauntId
             );
             return reviewsId.some((reviewId) => {
-                console.log(
-                    "есть ли незагруженные блюда",
-                    api.getState(),
-                    reviewId,
-                    selectReviewById(api.getState() as State, reviewId)
-                );
-                return !selectReviewById(api.getState() as State, reviewId);
+                return !selectReviewById(api.getState() as State, reviewId); // запрашиваем, если хотя бы одного из отзывов нет у нас в сторе
             });
         },
     }
