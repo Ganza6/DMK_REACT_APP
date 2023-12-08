@@ -14,6 +14,14 @@ export interface State {
 }
 
 interface SliceOfState<T> {
+    requestStatus: requestStatus;
     entities: customMap<T>;
     ids: Array<string>;
+}
+
+export enum requestStatus {
+    "PENDING" = "Ожидание",
+    "READY" = "Получено",
+    "ERROR" = "Ошибка",
+    "EMPTY" = "Пусто",
 }

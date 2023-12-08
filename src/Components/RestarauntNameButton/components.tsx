@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { selectRestarauntById } from "../../Redux/features/entities/restaraunt/selectors";
 import styles from "./styles.module.css";
 import { useContext } from "react";
 import { ModeContext } from "../../Contexts/modeContext/context";
 import { appMode } from "../../Constants/appMode";
 import { State } from "../../Models/StateModel";
+import { selectRestarauntById } from "../../Redux/entities/restaraunt/selectors";
 
 export function RestarauntNameButton({
     restarauntId,

@@ -1,4 +1,4 @@
-import { State } from "../../../../Models/StateModel";
+import { State } from "../../../Models/StateModel";
 
 const selectDishSlice = (state: State) => state.dish;
 
