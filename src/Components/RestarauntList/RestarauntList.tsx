@@ -15,6 +15,7 @@ export function RestarauntList({
         disptatch(getRestaraunts());
     }, []);
     const restarauntIds = useSelector(selectRestarauntIds);
+
     if (!restarauntIds.length) {
         return "Рестораны загружаются ...";
     }

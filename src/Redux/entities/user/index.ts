@@ -9,7 +9,7 @@ export const userSlice = createSlice({
     initialState: {
         entities: {},
         requestStatus: requestStatus.EMPTY,
-        ids: {},
+        ids: [] as Array<string>,
     },
     reducers: {},
     extraReducers: (builder) => {

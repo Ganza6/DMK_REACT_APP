@@ -9,7 +9,7 @@ export const reviewSlice = createSlice({
     initialState: {
         entities: {},
         requestStatus: requestStatus.EMPTY,
-        ids: {},
+        ids: [] as Array<string>,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -35,9 +35,10 @@ export const reviewSlice = createSlice({
                             },
                             state.entities
                         )),
-                        (state.ids = payload.map(
-                            (el: ReviewNormalized) => el.id
-                        ));
+                        (state.ids = [
+                            ...state.ids,
+                            ...payload.map((el: ReviewNormalized) => el.id),
+                        ]);
                 }
             );
     },

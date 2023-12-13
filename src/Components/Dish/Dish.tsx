@@ -17,15 +17,13 @@ export function Dish({
         return "загрузка блюда";
     }
     const [numberOfDish, setNumberOfDish] = useState(0);
-    const dishFromStore = useSelector((state: State) =>
-        selectDishById(state, dishId)
-    );
+    const dish = useSelector((state: State) => selectDishById(state, dishId));
 
-    if (!dishFromStore?.id) {
+    if (!dish?.id) {
         // если не нашли блюдо возвращаем пустоту
         return;
     } else {
-        const { name, price } = dishFromStore ?? {};
+        const { name, price } = dish ?? {};
 
         return (
             <div className={(className ? className : "") + " " + styles.dish}>

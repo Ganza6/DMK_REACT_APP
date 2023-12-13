@@ -9,7 +9,7 @@ export const dishSlice = createSlice({
     initialState: {
         entities: {},
         requestStatus: requestStatus.EMPTY,
-        ids: {},
+        ids: [] as Array<string>,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -35,9 +35,10 @@ export const dishSlice = createSlice({
                             },
                             state.entities // пополнять блюда, а не зачищать их
                         )),
-                        (state.ids = payload.map(
-                            (el: DishNormalized) => el.id
-                        ));
+                        (state.ids = [
+                            ...state.ids,
+                            ...payload.map((el: DishNormalized) => el.id),
+                        ]);
                 }
             );
     },
