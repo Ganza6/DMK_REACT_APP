@@ -1,21 +1,17 @@
-import { useSelector } from "react-redux";
 import styles from "./styles.module.css";
 import { useContext } from "react";
 import { ModeContext } from "../../Contexts/modeContext/context";
 import { appMode } from "../../Constants/appMode";
-import { State } from "../../Models/StateModel";
-import { selectRestarauntById } from "../../Redux/entities/restaraunt/selectors";
 
 export function RestarauntNameButton({
-    restarauntId,
+    restarauntName,
     onClickFunc,
+    restarauntId,
 }: {
-    restarauntId: string;
+    restarauntName: string;
     onClickFunc: Function;
+    restarauntId: string;
 }) {
-    const restarauntName = useSelector(
-        (state: State) => selectRestarauntById(state, restarauntId).name
-    );
     const contextPayload = useContext(ModeContext);
     return (
         <button

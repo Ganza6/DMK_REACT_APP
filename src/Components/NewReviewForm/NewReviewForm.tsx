@@ -3,7 +3,8 @@ import { Counter } from "../Counter/Counter";
 import { IReview } from "../../Models/Models";
 import { DEFAULT_FORM_VALUE, STEP_RATE } from "./constants";
 import styles from "./styles.module.css";
-import { MIN_RATE, MAX_RATE } from "../../Constants/reviewRateConstants";
+import { MIN_RATE, MAX_RATE } from "../../constants/reviewRateConstants";
+import { usePostReviewMutation } from "../../Redux/services/api";
 
 enum actionType {
     "ChangeName",
@@ -27,7 +28,8 @@ function reducer(state: IReview, action: IAction): IReview {
     }
 }
 
-export function NewReviewForm() {
+export function NewReviewForm({ restarauntId }: { restarauntId: string }) {
+    const [createReview] = usePostReviewMutation();
     const [state, dispatch] = useReducer(reducer, DEFAULT_FORM_VALUE);
     console.info("Render", "NewReviewForm");
 
@@ -72,6 +74,27 @@ export function NewReviewForm() {
                     })
                 }
             />
+            <div>
+                <button
+                    onClick={() => {
+                        console.log(restarauntId, {
+                            text: state.text,
+                            rating: state.rating,
+                            userId: "a304959a-76c0-4b34-954a-b38dbf310360",
+                        });
+                        createReview({
+                            restarauntId,
+                            newReview: {
+                                text: state.text,
+                                rating: state.rating,
+                                userId: "a304959a-76c0-4b34-954a-b38dbf310360",
+                            },
+                        });
+                    }}
+                >
+                    Отправить
+                </button>
+            </div>
         </div>
     );
 }
