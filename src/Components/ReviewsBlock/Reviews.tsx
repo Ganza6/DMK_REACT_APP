@@ -4,9 +4,10 @@ import { ReviewNormalized } from "../../Models/NormalizedModels";
 
 export function ReviewsBlock({ restarauntId }: { restarauntId: string }) {
     console.info("Render", "ReviewsBlock");
-    const { data: reviews, isFetching } =
+    const { data: reviews, isLoading } =
         useGetRestarauntReviewsQuery(restarauntId);
-    if (isFetching) {
+    if (isLoading) {
+        // тут лоадинг, чтоб добавление нового отзыва не перезагружало весь блок отзывов
         return "Загрузка отзывов";
     }
     return (
