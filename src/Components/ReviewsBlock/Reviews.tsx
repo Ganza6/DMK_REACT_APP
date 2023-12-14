@@ -4,10 +4,10 @@ import { ReviewNormalized } from "../../Models/NormalizedModels";
 
 export function ReviewsBlock({ restarauntId }: { restarauntId: string }) {
     console.info("Render", "ReviewsBlock");
-    const { data: reviews, isLoading } =
+    const { data: reviews, isFetching } =
         useGetRestarauntReviewsQuery(restarauntId);
-    if (isLoading) {
-        // тут лоадинг, чтоб добавление нового отзыва не перезагружало весь блок отзывов
+    if (isFetching) {
+        // фетчинг лучше, потому что при переходе на ресторан с незагруженными отзывами пользователь видит отзывы прошлого ресторана
         return "Загрузка отзывов";
     }
     return (
