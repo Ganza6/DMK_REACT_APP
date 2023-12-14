@@ -8,10 +8,10 @@ import { useGetUsersQuery } from "../../Redux/services/api";
 import { NewReviewForm } from "../NewReviewForm/NewReviewForm";
 
 export function Review({ review }: { review: ReviewNormalized }) {
-    const { text, rating, userId, id } = review;
-
     const { data: user, isFetching } = useGetUsersQuery(null);
     const [showChangeForm, setShowChangeForm] = useState(false);
+
+    const { text, rating, userId, id } = review;
     const userName = isFetching
         ? "Ноунейм"
         : (user as UserNormalized[]).find((user) => user.id == userId)?.name;
@@ -34,7 +34,7 @@ export function Review({ review }: { review: ReviewNormalized }) {
                     restarauntId={"test"}
                     defaultFormValue={{ userId, rating, text, userName, id }}
                     isPostForm={false}
-                    onClick={setShowChangeForm}
+                    onClickSend={setShowChangeForm}
                 ></NewReviewForm>
             </div>
         );

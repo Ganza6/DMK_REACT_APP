@@ -35,12 +35,12 @@ export function NewReviewForm({
     restarauntId,
     defaultFormValue = DEFAULT_FORM_VALUE,
     isPostForm = true, // что будет происходить после нажатия кнопки Отправить POST or PATCH
-    onClick,
+    onClickSend,
 }: {
     restarauntId: string;
-    defaultFormValue: any;
+    defaultFormValue: ReviewNormalized;
     isPostForm?: boolean;
-    onClick?: Function;
+    onClickSend?: Function;
 }) {
     const [createReview] = usePostReviewMutation();
     const [patchReview] = usePatchReviewMutation();
@@ -63,7 +63,7 @@ export function NewReviewForm({
             <textarea
                 className={styles.review_form_element}
                 placeholder="Введите ваш отзыв"
-                defaultValue={state.text}
+                defaultValue={defaultFormValue.text}
                 onBlur={(e) =>
                     dispatch({
                         payload: e.target.value,
@@ -112,8 +112,8 @@ export function NewReviewForm({
                                           userId: state.userId,
                                       },
                                   });
-                                  if (onClick) {
-                                      onClick(false);
+                                  if (onClickSend) {
+                                      onClickSend(false);
                                   }
                               }
                     }

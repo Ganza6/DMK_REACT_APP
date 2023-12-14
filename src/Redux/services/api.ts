@@ -53,8 +53,8 @@ export const api = createApi({
                 method: "PATCH",
                 body: changedReview,
             }),
-            invalidatesTags: (_result, _, { restarauntId }) => {
-                return [{ type: "Review" as never, id: restarauntId }];
+            invalidatesTags: (_result, _, { reviewId }) => {
+                return [{ type: "Review" as never, id: reviewId }];
             },
         }),
     }),
