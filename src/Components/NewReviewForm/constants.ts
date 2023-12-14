@@ -5,5 +5,5 @@ export const DEFAULT_FORM_VALUE: IReview = {
     text: "",
     user: "",
     rating: 0,
-    id: "1",
+    id: "a304959a-76c0-4b34-954a-b38dbf310360",
 };

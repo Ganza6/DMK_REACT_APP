@@ -47,6 +47,16 @@ export const api = createApi({
                 url: `/dish/${dishId}`,
             }),
         }),
+        patchReview: builder.mutation({
+            query: ({ reviewId, changedReview }) => ({
+                url: `/review/${reviewId}`,
+                method: "PATCH",
+                body: changedReview,
+            }),
+            invalidatesTags: (_result, _, { restarauntId }) => {
+                return [{ type: "Review" as never, id: restarauntId }];
+            },
+        }),
     }),
 });
 
@@ -57,4 +67,5 @@ export const {
     useGetUsersQuery,
     usePostReviewMutation,
     useGetDishByidQuery,
+    usePatchReviewMutation,
 } = api;
