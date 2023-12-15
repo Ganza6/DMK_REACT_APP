@@ -3,10 +3,6 @@ import { Counter } from "../Counter/Counter";
 import { DEFAULT_FORM_VALUE, STEP_RATE } from "./constants";
 import styles from "./styles.module.css";
 import { MIN_RATE, MAX_RATE } from "../../constants/reviewRateConstants";
-import {
-    usePatchReviewMutation,
-    usePostReviewMutation,
-} from "../../Redux/services/api";
 import { ReviewNormalized } from "../../Models/NormalizedModels";
 
 enum actionType {
@@ -32,24 +28,17 @@ function reducer(state: ReviewNormalized, action: IAction): ReviewNormalized {
 }
 
 export function NewReviewForm({
-    restarauntId,
     defaultFormValue = DEFAULT_FORM_VALUE,
-    isPostForm = true, // что будет происходить после нажатия кнопки Отправить POST or PATCH
-    onClickSend,
+    getFormState,
 }: {
-    restarauntId: string;
-    defaultFormValue: ReviewNormalized;
-    isPostForm?: boolean;
-    onClickSend?: Function;
+    defaultFormValue?: ReviewNormalized;
+    getFormState?: Function;
 }) {
-    const [createReview] = usePostReviewMutation();
-    const [patchReview] = usePatchReviewMutation();
     const [state, dispatch] = useReducer(reducer, defaultFormValue);
 
     return (
         <div className={styles.review_form}>
             <input
-                readOnly={isPostForm ? false : true}
                 className={styles.review_form_element}
                 placeholder="Имя"
                 defaultValue={state.userId}
@@ -91,31 +80,10 @@ export function NewReviewForm({
             />
             <div>
                 <button
-                    onClick={
-                        isPostForm
-                            ? () => {
-                                  createReview({
-                                      restarauntId,
-                                      newReview: {
-                                          text: state.text,
-                                          rating: state.rating,
-                                          userId: state.userId,
-                                      },
-                                  });
-                              }
-                            : () => {
-                                  patchReview({
-                                      reviewId: state.id,
-                                      changedReview: {
-                                          text: state.text,
-                                          rating: state.rating,
-                                          userId: state.userId,
-                                      },
-                                  });
-                                  if (onClickSend) {
-                                      onClickSend(false);
-                                  }
-                              }
+                    onClick={() =>
+                        getFormState
+                            ? getFormState(state)
+                            : console.log("На кнопку не назначено действий")
                     }
                 >
                     Отправить

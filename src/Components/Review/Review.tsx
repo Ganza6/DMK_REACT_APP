@@ -5,11 +5,15 @@ import {
     UserNormalized,
 } from "../../Models/NormalizedModels";
 import { useGetUsersQuery } from "../../Redux/services/api";
-import { NewReviewForm } from "../NewReviewForm/NewReviewForm";
+import { NewReviewFormPatch } from "../NewReviewForm/ChangeContainerNewReviewForm";
 
 export function Review({ review }: { review: ReviewNormalized }) {
     const { data: user, isFetching } = useGetUsersQuery(null);
     const [showChangeForm, setShowChangeForm] = useState(false);
+
+    function changeNewFormReviewVisability() {
+        setShowChangeForm(!showChangeForm);
+    }
 
     const { text, rating, userId, id } = review;
     const userName = isFetching
@@ -30,12 +34,10 @@ export function Review({ review }: { review: ReviewNormalized }) {
     } else {
         return (
             <div>
-                <NewReviewForm
-                    restarauntId={"test"}
+                <NewReviewFormPatch
                     defaultFormValue={{ userId, rating, text, userName, id }}
-                    isPostForm={false}
-                    onClickSend={setShowChangeForm}
-                ></NewReviewForm>
+                    onClickSend={changeNewFormReviewVisability}
+                ></NewReviewFormPatch>
             </div>
         );
     }

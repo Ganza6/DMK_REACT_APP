@@ -1,7 +1,7 @@
 import { RestarauntNormalized } from "../../Models/NormalizedModels";
 import { useGetRestarauntsQuery } from "../../Redux/services/api";
 import { Menu } from "../Menu/Menu";
-import { NewReviewForm } from "../NewReviewForm/NewReviewForm";
+import { NewReviewFormPost } from "../NewReviewForm/CreateContainerNewReviewForm";
 import { ReviewsBlock } from "../ReviewsBlock/Reviews";
 
 export function Restaraunt({ restarauntId }: { restarauntId: string }) {
@@ -21,7 +21,7 @@ export function Restaraunt({ restarauntId }: { restarauntId: string }) {
             <h1>{restaraunt?.name}</h1>
             <Menu restarauntMenu={restaraunt?.menu ?? []} />
             <ReviewsBlock restarauntId={restarauntId} />
-            <NewReviewForm restarauntId={restarauntId} />
+            <NewReviewFormPost restarauntId={restarauntId} />
         </>
     );
 }
