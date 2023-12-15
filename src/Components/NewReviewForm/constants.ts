@@ -1,9 +1,9 @@
-import { IReview } from "../../Models/Models";
+import { ReviewNormalized } from "../../Models/NormalizedModels";
 
 export const STEP_RATE: number = 0.5;
-export const DEFAULT_FORM_VALUE: IReview = {
+export const DEFAULT_FORM_VALUE: ReviewNormalized = {
     text: "",
-    user: "",
+    userId: "",
     rating: 0,
-    id: "1",
+    id: "a304959a-76c0-4b34-954a-b38dbf310360",
 };

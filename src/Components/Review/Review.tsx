@@ -1,37 +1,43 @@
-import { useSelector } from "react-redux";
-import { MAX_RATE } from "../../Constants/reviewRateConstants";
-import { State } from "../../Models/StateModel";
-import { selectReviewById } from "../../Redux/entities/review/selectors";
-import { selectUserNameById } from "../../Redux/entities/user/selectors";
+import { useState } from "react";
+import { MAX_RATE } from "../../constants/reviewRateConstants";
+import {
+    ReviewNormalized,
+    UserNormalized,
+} from "../../Models/NormalizedModels";
+import { useGetUsersQuery } from "../../Redux/services/api";
+import { NewReviewFormPatch } from "../NewReviewForm/ChangeContainerNewReviewForm";
 
-export function Review({ reviewId }: { reviewId: string }) {
-    const {
-        text,
-        rating,
-        userId,
-        id: reviewIdFromStore,
-    } = useSelector(
-        (state: State) =>
-            selectReviewById(state, reviewId) ?? {
-                text: "",
-                rating: "",
-                userId: "",
-            }
-    );
+export function Review({ review }: { review: ReviewNormalized }) {
+    const { data: user, isFetching } = useGetUsersQuery(null);
+    const [showChangeForm, setShowChangeForm] = useState(false);
 
-    const userName = useSelector(
-        (state: State) =>
-            selectUserNameById(state, userId) ?? "Неизвестный пользователь"
-    );
+    function changeNewFormReviewVisability() {
+        setShowChangeForm(!showChangeForm);
+    }
 
-    if (!reviewIdFromStore) {
-        return; // пока не получили ревью из стора - возвращаем пустоту
-    } else {
+    const { text, rating, userId, id } = review;
+    const userName = isFetching
+        ? "Ноунейм"
+        : (user as UserNormalized[]).find((user) => user.id == userId)?.name;
+    if (!showChangeForm) {
         return (
             <div>
                 <h3>{text}</h3>
                 <span>{userName}</span>
                 <span>{` ${rating}/${MAX_RATE}`}</span>
+                <br />
+                <button onClick={() => setShowChangeForm(true)}>
+                    Изменить отзыв
+                </button>
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                <NewReviewFormPatch
+                    defaultFormValue={{ userId, rating, text, userName, id }}
+                    onClickSend={changeNewFormReviewVisability}
+                ></NewReviewFormPatch>
             </div>
         );
     }

@@ -1,26 +1,20 @@
-import { useEffect } from "react";
 import { Review } from "../Review/Review";
-import { AppDispatch } from "../../Redux";
-import { useDispatch, useSelector } from "react-redux";
-import { selectRestarauntReviews } from "../../Redux/entities/restaraunt/selectors";
-import { State } from "../../Models/StateModel";
-import { getRestarauntReviews } from "../../Redux/entities/review/thunks";
+import { useGetRestarauntReviewsQuery } from "../../Redux/services/api";
+import { ReviewNormalized } from "../../Models/NormalizedModels";
 
 export function ReviewsBlock({ restarauntId }: { restarauntId: string }) {
     console.info("Render", "ReviewsBlock");
-    const disptatch: AppDispatch = useDispatch();
-    const reviewsId = useSelector((state: State) =>
-        selectRestarauntReviews(state, restarauntId)
-    );
-    useEffect(() => {
-        disptatch(getRestarauntReviews(restarauntId));
-    }, [restarauntId]);
-
+    const { data: reviews, isFetching } =
+        useGetRestarauntReviewsQuery(restarauntId);
+    if (isFetching) {
+        // фетчинг лучше, потому что при переходе на ресторан с незагруженными отзывами пользователь видит отзывы прошлого ресторана
+        return "Загрузка отзывов";
+    }
     return (
         <>
             <h2>Reviews</h2>
-            {reviewsId.map((id) => (
-                <Review reviewId={id} />
+            {reviews.map((review: ReviewNormalized) => (
+                <Review review={review} />
             ))}
         </>
     );
