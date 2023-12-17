@@ -1,9 +1,9 @@
 import { useReducer } from "react";
 import { Counter } from "../Counter/Counter";
-import { IReview } from "../../Models/Models";
 import { DEFAULT_FORM_VALUE, STEP_RATE } from "./constants";
 import styles from "./styles.module.css";
-import { MIN_RATE, MAX_RATE } from "../../Constants/reviewRateConstants";
+import { MIN_RATE, MAX_RATE } from "../../constants/reviewRateConstants";
+import { ReviewNormalized } from "../../Models/NormalizedModels";
 
 enum actionType {
     "ChangeName",
@@ -15,11 +15,11 @@ interface IAction {
     type: actionType;
 }
 
-function reducer(state: IReview, action: IAction): IReview {
+function reducer(state: ReviewNormalized, action: IAction): ReviewNormalized {
     const { payload, type } = action;
     switch (type) {
         case actionType.ChangeName:
-            return { ...state, user: payload as string };
+            return { ...state, userId: payload as string };
         case actionType.ChangeText:
             return { ...state, text: payload as string };
         case actionType.ChangeRate:
@@ -27,16 +27,21 @@ function reducer(state: IReview, action: IAction): IReview {
     }
 }
 
-export function NewReviewForm() {
-    const [state, dispatch] = useReducer(reducer, DEFAULT_FORM_VALUE);
-    console.info("Render", "NewReviewForm");
+export function NewReviewForm({
+    defaultFormValue = DEFAULT_FORM_VALUE,
+    getFormState,
+}: {
+    defaultFormValue?: ReviewNormalized;
+    getFormState?: Function;
+}) {
+    const [state, dispatch] = useReducer(reducer, defaultFormValue);
 
     return (
         <div className={styles.review_form}>
-            <h2>Your review</h2>
             <input
                 className={styles.review_form_element}
                 placeholder="Имя"
+                defaultValue={state.userId}
                 onBlur={(e) =>
                     dispatch({
                         payload: e.target.value,
@@ -47,6 +52,7 @@ export function NewReviewForm() {
             <textarea
                 className={styles.review_form_element}
                 placeholder="Введите ваш отзыв"
+                defaultValue={defaultFormValue.text}
                 onBlur={(e) =>
                     dispatch({
                         payload: e.target.value,
@@ -72,6 +78,17 @@ export function NewReviewForm() {
                     })
                 }
             />
+            <div>
+                <button
+                    onClick={() =>
+                        getFormState
+                            ? getFormState(state)
+                            : console.log("На кнопку не назначено действий")
+                    }
+                >
+                    Отправить
+                </button>
+            </div>
         </div>
     );
 }

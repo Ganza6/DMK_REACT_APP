@@ -9,6 +9,19 @@
     font-weight: bold;
 }
 
-.mode_advanced{
+.mode_advanced a{
     color: red;
 }
+
+.restaraunt_btn a:visited{
+    color: black; 
+}
+
+.mode_advanced a:visited{
+    color: red; 
+}
+
+.restaraunt_btn a{
+    text-decoration:none;
+}
+

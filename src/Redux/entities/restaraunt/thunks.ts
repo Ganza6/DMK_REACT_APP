@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SERVER_ADDRESS } from "../../../Constants/serverAddress";
 import { selectRestarauntsRequestStatus } from "./selectors";
 import { State, requestStatus } from "../../../Models/StateModel";
+import { SERVER_ADDRESS } from "../../../constants/serverAddress";
 
 export const getRestaraunts = createAsyncThunk(
     "getRestaraunts",

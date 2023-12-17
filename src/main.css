@@ -2,3 +2,7 @@ body::-webkit-scrollbar { width: 0; }
 body{
     margin: 0px;
 }
+
+a.active{
+    background-color: yellow;
+}

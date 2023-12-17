@@ -1,34 +1,35 @@
-import { Menu } from "../Menu/Menu";
-import { NewReviewForm } from "../NewReviewForm/NewReviewForm";
-import { ReviewsBlock } from "../ReviewsBlock/Reviews";
-import { useDispatch, useSelector } from "react-redux";
-import { State } from "../../Models/StateModel";
-import { selectRestarauntById } from "../../Redux/entities/restaraunt/selectors";
-import { useEffect } from "react";
-import { getUsers } from "../../Redux/entities/user/thunks";
-import { AppDispatch } from "../../Redux";
-
+import { Outlet, useNavigate } from "react-router-dom";
+import { RestarauntNormalized } from "../../Models/NormalizedModels";
+import { useGetRestarauntsQuery } from "../../Redux/services/api";
+import { ButtonWithLink } from "../ButtonWithLink/components";
 export function Restaraunt({ restarauntId }: { restarauntId: string }) {
     if (!restarauntId) {
-        // комментарий по поводу условного вызова хуков
-        // "Проблема с условными вызовами хуков заключается в том, что React полагается на порядок вызова хуков для правильного отслеживания их состояния. Если хуки вызываются условно (например, внутри if, циклов или функций), React не может гарантировать, что порядок хуков будет одинаковым при каждом рендеринге компонента."
-        return;
+        return "";
     }
-    const restaraunt = useSelector((state: State) =>
-        selectRestarauntById(state, restarauntId)
+
+    const { data, isFetching } = useGetRestarauntsQuery(null);
+    if (isFetching) {
+        return "Загрузка ресторана";
+    }
+    const restaraunt = (data as RestarauntNormalized[]).find(
+        (restaraunt) => restaraunt.id === restarauntId
     );
-
-    const disptatch: AppDispatch = useDispatch();
-    useEffect(() => {
-        disptatch(getUsers());
-    }, []);
-
     return (
         <>
-            <h1>{restaraunt.name}</h1>
-            <Menu restarauntId={restarauntId} />
-            <ReviewsBlock restarauntId={restarauntId} />
-            <NewReviewForm />
+            <h1>{restaraunt?.name}</h1>
+            <ButtonWithLink
+                buttonName="Menu"
+                buttonLink="menu"
+                className="down"
+            ></ButtonWithLink>
+
+            <ButtonWithLink
+                buttonName="Review"
+                buttonLink="reviews"
+                className="down"
+            ></ButtonWithLink>
+            <br></br>
+            <Outlet></Outlet>
         </>
     );
 }
