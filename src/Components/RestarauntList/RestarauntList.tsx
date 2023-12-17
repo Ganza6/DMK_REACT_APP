@@ -1,12 +1,9 @@
 import styles from "./styles.module.css";
-import { RestarauntNameButton } from "../RestarauntNameButton/components";
+import { ButtonWithLink } from "../ButtonWithLink/components";
 import { useGetRestarauntsQuery } from "../../Redux/services/api";
 import { RestarauntNormalized } from "../../Models/NormalizedModels";
-export function RestarauntList({
-    setCurrentRestarauntId,
-}: {
-    setCurrentRestarauntId: Function;
-}) {
+import { Outlet } from "react-router-dom";
+export function RestarauntList({}: {}) {
     const { data: restaraunts, isLoading } = useGetRestarauntsQuery(null);
 
     if (isLoading) {
@@ -14,14 +11,17 @@ export function RestarauntList({
     }
     console.log("Render", "RestarauntList");
     return (
-        <div className={styles.restaraunts_div}>
-            {restaraunts.map((restaraunt: RestarauntNormalized) => (
-                <RestarauntNameButton
-                    restarauntName={restaraunt.name}
-                    onClickFunc={(id: string) => setCurrentRestarauntId(id)}
-                    restarauntId={restaraunt.id}
-                />
-            ))}
+        <div>
+            <div className={styles.restaraunts_div}>
+                {restaraunts.map((restaraunt: RestarauntNormalized) => (
+                    <ButtonWithLink
+                        buttonName={restaraunt.name}
+                        buttonLink={restaraunt.id + ""}
+                        className={"up"}
+                    />
+                ))}
+            </div>
+            <Outlet></Outlet>
         </div>
     );
 }

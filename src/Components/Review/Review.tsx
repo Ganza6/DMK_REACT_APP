@@ -8,6 +8,7 @@ import { useGetUsersQuery } from "../../Redux/services/api";
 import { NewReviewFormPatch } from "../NewReviewForm/ChangeContainerNewReviewForm";
 
 export function Review({ review }: { review: ReviewNormalized }) {
+    console.log("Render Review");
     const { data: user, isFetching } = useGetUsersQuery(null);
     const [showChangeForm, setShowChangeForm] = useState(false);
 

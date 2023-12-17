@@ -1,9 +1,10 @@
 import { ReactNode, useState } from "react";
-import { appMode } from "../../Constants/appMode";
 import { ModeContext } from "./context";
+import { appMode } from "../../Constants/appMode";
 
 export function ModeProvider({ children }: { children: ReactNode }) {
     const [mode, setMode] = useState(appMode.simple);
+    console.log("Render ModeProvider");
     return (
         <ModeContext.Provider
             value={{

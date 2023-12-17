@@ -1,6 +1,7 @@
 import { Review } from "../Review/Review";
 import { useGetRestarauntReviewsQuery } from "../../Redux/services/api";
 import { ReviewNormalized } from "../../Models/NormalizedModels";
+import { NewReviewFormPost } from "../NewReviewForm/CreateContainerNewReviewForm";
 
 export function ReviewsBlock({ restarauntId }: { restarauntId: string }) {
     console.info("Render", "ReviewsBlock");
@@ -16,6 +17,7 @@ export function ReviewsBlock({ restarauntId }: { restarauntId: string }) {
             {reviews.map((review: ReviewNormalized) => (
                 <Review review={review} />
             ))}
+            <NewReviewFormPost restarauntId={restarauntId} />
         </>
     );
 }

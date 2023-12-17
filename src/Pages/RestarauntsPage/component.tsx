@@ -8,7 +8,7 @@ const { app_wrap, app } = styles;
 
 export function RestarauntPage({}: {}) {
     console.log("Render", "RestarauntPage");
-    const [currentRestarauntId, setCurrentRestarauntId] = useState("");
+    //const [currentRestarauntId, setCurrentRestarauntId] = useState("");
 
     return (
         <Layout
@@ -17,9 +17,9 @@ export function RestarauntPage({}: {}) {
                     <div className={app_wrap}>
                         <div className={app}>
                             <RestarauntList
-                                setCurrentRestarauntId={setCurrentRestarauntId}
+                            //setCurrentRestarauntId={setCurrentRestarauntId}
                             />
-                            <Restaraunt restarauntId={currentRestarauntId} />
+                            <Restaraunt restarauntId={""} />
                         </div>
                     </div>
                 </div>

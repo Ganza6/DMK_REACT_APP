@@ -1,9 +1,7 @@
+import { Outlet, useNavigate } from "react-router-dom";
 import { RestarauntNormalized } from "../../Models/NormalizedModels";
 import { useGetRestarauntsQuery } from "../../Redux/services/api";
-import { Menu } from "../Menu/Menu";
-import { NewReviewFormPost } from "../NewReviewForm/CreateContainerNewReviewForm";
-import { ReviewsBlock } from "../ReviewsBlock/Reviews";
-
+import { ButtonWithLink } from "../ButtonWithLink/components";
 export function Restaraunt({ restarauntId }: { restarauntId: string }) {
     if (!restarauntId) {
         return "";
@@ -19,9 +17,19 @@ export function Restaraunt({ restarauntId }: { restarauntId: string }) {
     return (
         <>
             <h1>{restaraunt?.name}</h1>
-            <Menu restarauntMenu={restaraunt?.menu ?? []} />
-            <ReviewsBlock restarauntId={restarauntId} />
-            <NewReviewFormPost restarauntId={restarauntId} />
+            <ButtonWithLink
+                buttonName="Menu"
+                buttonLink="menu"
+                className="down"
+            ></ButtonWithLink>
+
+            <ButtonWithLink
+                buttonName="Review"
+                buttonLink="reviews"
+                className="down"
+            ></ButtonWithLink>
+            <br></br>
+            <Outlet></Outlet>
         </>
     );
 }

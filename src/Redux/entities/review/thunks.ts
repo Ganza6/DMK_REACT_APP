@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SERVER_ADDRESS } from "../../../Constants/serverAddress";
+import { SERVER_ADDRESS } from "../../../constants/serverAddress";
 import { selectRestarauntReviews } from "../restaraunt/selectors";
 import { State } from "../../../Models/StateModel";
 import { selectReviewById } from "./selectors";
